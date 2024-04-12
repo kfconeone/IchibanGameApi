@@ -1,0 +1,6 @@
+@IChibanGameServer_HostAddress = http://localhost:5146
+
+GET {{IChibanGameServer_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
