@@ -7,6 +7,9 @@ using Microsoft.Extensions.DependencyInjection;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+//71E62E83006CBFA179F3FE71253169E01C65B5352AE41DDA7D7C921BC8F5A37A
+//71E62E83006CBFA179F3FE71253169E01C65B5352AE41DDA7D7C921BC8F5A37A
+//var result = HashManager.GenerateSHA256String("A2,B6,C13,D24,E55mykey");
 
 builder.Services.AddControllers();
 // Add CORS

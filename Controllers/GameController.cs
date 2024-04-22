@@ -14,10 +14,13 @@ namespace IChibanGameServer.Controllers
     [Route("[controller]")]
     public class GameController(
         IchibanGameContext context,
-        GameManager gameManager) : Controller
+        GameManager gameManager
+        
+        ) : Controller
     {
         private readonly IchibanGameContext _context = context;
         private readonly GameManager _gameManager = gameManager;
+
 
         [HttpGet("ECPay/{amount}")]
         public IActionResult GetCheckMacValue(string amount)
