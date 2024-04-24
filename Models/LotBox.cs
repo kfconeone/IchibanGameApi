@@ -29,6 +29,15 @@ namespace IChibanGameServer.Models
 
         public int Price { get; set; }
 
+        //SHA-256加密用的原始字串
+        public string PrizePositions { get; set; }
+        //SHA-256鹽值
+        public string secretKey { get; set; }
+        //SHA-256加密後的雜湊值
+        public string hash { get; set; }
+
+
+
         [ConcurrencyCheck]
         public DateTime LockEndTime { get; set; }
 
@@ -39,5 +48,7 @@ namespace IChibanGameServer.Models
         public DateTime OpenTime { get; set; }
         
         public DateTime CloseTime { get; set; }
+
+        
     }
 }
