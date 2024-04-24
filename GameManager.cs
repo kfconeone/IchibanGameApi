@@ -19,7 +19,7 @@ namespace IChibanGameServer
 
                 // 更新LotBox
                 var lotBox = _context.LotBoxes.FirstOrDefault(lb => lb.BoxId == boxId) ?? throw new ArgumentException("找不到籤筒");
-                if (lotBox.LockEndTime > nowTicks && lotBox.LastUserId != model.UserId) throw new ArgumentException("籤筒鎖定中");
+                if (lotBox.LockEndTime.Ticks > nowTicks && lotBox.LastUserId != model.UserId) throw new ArgumentException("籤筒鎖定中");
 
                 // 更新Lot
                 var lots = _context.Lots.Where(l => model.PositionIndexs.Contains(l.PositionIndex));
@@ -43,7 +43,7 @@ namespace IChibanGameServer
 
 
                 //開始鎖定籤筒
-                long tempLockEndTime = lotBox.LockEndTime;
+                long tempLockEndTime = lotBox.LockEndTime.Ticks;
                 tempLockEndTime += 30 * lotsCount;
 
 
@@ -54,7 +54,7 @@ namespace IChibanGameServer
                     lockDurationInSeconds = 300 * TimeSpan.TicksPerSecond;
                 }
 
-                lotBox.LockEndTime = nowTicks + lockDurationInSeconds;
+                lotBox.LockEndTime = new DateTime(nowTicks + lockDurationInSeconds);
                 _context.LotBoxes.Update(lotBox);
 
 
@@ -69,7 +69,7 @@ namespace IChibanGameServer
                 {
                     LotBoxId = boxId,
                     Type = GameType.Standard,
-                    LockEndTime = lotBox.LockEndTime,
+                    LockEndTime = lotBox.LockEndTime.Ticks,
                     Lots =
                     [
                         .. lots.Select(l => new ResponseLotModel
@@ -111,7 +111,7 @@ namespace IChibanGameServer
 
                 // 更新LotBox
                 var lotBox = _context.LotBoxes.FirstOrDefault(lb => lb.BoxId == boxId) ?? throw new ArgumentException("找不到籤筒");
-                if (lotBox.LockEndTime > nowTicks && lotBox.LastUserId != model.UserId) throw new ArgumentException("籤筒鎖定中");
+                if (lotBox.LockEndTime.Ticks > nowTicks && lotBox.LastUserId != model.UserId) throw new ArgumentException("籤筒鎖定中");
 
                 // 更新Lot
                 var lots = _context.Lots.Where(l => model.PositionIndexs.Contains(l.PositionIndex));
@@ -188,7 +188,7 @@ namespace IChibanGameServer
 
                 // 更新LotBox
                 var lotBox = _context.LotBoxes.FirstOrDefault(lb => lb.BoxId == boxId) ?? throw new ArgumentException("找不到籤筒");
-                if (lotBox.LockEndTime > nowTicks && lotBox.LastUserId != model.UserId) throw new ArgumentException("籤筒鎖定中");
+                if (lotBox.LockEndTime.Ticks > nowTicks && lotBox.LastUserId != model.UserId) throw new ArgumentException("籤筒鎖定中");
 
                 // 更新Lot
                 var lots = _context.Lots.Where(l => model.PositionIndexs.Contains(l.PositionIndex));
